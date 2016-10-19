@@ -7,17 +7,18 @@ app.set("view engine", "pug")
 app.set("views", __dirname + "/views")
 
 
-app.use(bodyParser.uurlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }))
 
+//this is the part that renders the form page with the search bar
+app.get ("/form", (request, response) =>{
+	console.log("about to render a form with a search bar")
 
-app.get('/form', (request, response) => {
-	console.log('GET /')
-
+	response.render("form")
 })
-
     
-app.post('/', (request,response) => {
-    console.log('POST /');
+app.post('/form', (request,response) => {
+    // console.log(request.body)
+    response.render(request.body)
 
 })
    
@@ -38,12 +39,7 @@ app.get ("/index", (request, response) => {
 	
 })
 
-//this is the part that renders the form page with the search bar
-app.get ("/form", (request, response) =>{
-	console.log("about to render a form with a search bar")
 
-	response.render("form")
-})
 
 
 // the listening port and a message to show you your app is running
