@@ -1,33 +1,60 @@
 doctype html
 html
   head
-    title create new user
+    title test form
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
   body
-    form(action='/createUser', method='POST')
-      fieldset
-        p Search bar
-        input(type='text', name='search', placeholder='Search..')
-        p firstname
-        input#firstname(type='text', name='firstname')
-        p lastname
-        input#lastname(type='text', name='lastname')
-        p email
-        input#email(type='text', name='email')
-        p Useless Radio buttons
-        label(for='radiobutton') To Be 
-        input#hamlet(type='radio', name='choice')
-        label(for='radiobutton') Or Not To Be 
-        input#hamlet(type='radio', name='choice')
-        p  The Infamous "do you have a bike question" 
-        label(for='checkbox1') I have an awesome bike 
-        input#hamlet(type='checkbox', name='choice')
-        label(for='checkbox') I stole a bike..... 
-        input#hamlet(type='checkbox', name='choice')
-        label(for='checkbox')  I had one, but I gave it to my cat 
-        input#hamlet(type='checkbox', name='choice')
-        p message
-        textarea#message(name='message', cols='40', rows='10')
-          | Dont leave a message...
-        br
-        button(type='submit')  submit 
-        input(type='reset', name='reset', value='reset')
+    .container
+      .row
+        form.col.s12(action='/createUser', method='POST')
+          .row
+            .input-field.col.s8.m6
+              p Search
+              input#search(type='text', name='search', placeholder='Search..')
+          .row
+            .input-field.col.s6.m4
+              p First name 
+              input#firstname.validate(type='text', name='firstname', placeholder='first name')
+          .row
+            .input-field.col.s6.m4
+              p Last name 
+              input#lastname(type='text', name='lastname', placeholder='last name')
+          .row
+            .input-field.col.s6.m4
+              p Email 
+              input#email(type='text', name='email', placeholder='email adress')
+          p Useless Radio buttons
+          input#hamlet1(name='hamlet', type='radio')
+          label(for='hamlet1') To Be
+          input#hamlet2(name='hamlet', type='radio')
+          label(for='hamlet2') Or Not To Be
+          p
+            | "I think human consciousness, is a tragic misstep in evolution.
+            br
+            |  We became too self-aware, nature created an aspect of nature separate from itself,
+            br
+            |  we are creatures that should not exist by natural law. 
+            br
+            | We are things that labor under the illusion of having a self; an accretion of sensory, experience and feeling,
+            br
+            |  programmed with total assurance that we are each somebody, when in fact everybody is nobody.
+            br
+            |  Maybe the honorable thing for our species to do is deny our programming, 
+            br
+            |  stop reproducing, walk hand in hand into extinction, one last midnight - brothers and sisters opting out of a raw deal. " 
+            br
+            br
+            i - Rust Cohle -
+          input#bike1(type='checkbox')
+          label(for='bike1') That sounds interesting I will contemplate this
+          input#bike2(type='checkbox', name='choice', checked='checked')
+          label(for='bike2')  Hmm. That sounds God-fucking-awful, 
+          input#bike3(type='checkbox', name='choice')
+          label(for='bike3')  What the flying fuck does that even mean ? 
+          .input-field.col.s12.m7
+            textarea#message.materialize-textarea(name='message', cols='40', rows='10')
+              | leave a message...
+            button#submit(type='submit', name='submit')  Submit 
+            button#reset(type='reset', name='reset', value='reset')  Reset 
+          br
