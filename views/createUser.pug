@@ -1,0 +1,33 @@
+doctype html
+html
+  head
+    title create new user
+  body
+    form(action='/createUser', method='POST')
+      fieldset
+        p Search bar
+        input(type='text', name='search', placeholder='Search..')
+        p firstname
+        input#firstname(type='text', name='firstname')
+        p lastname
+        input#lastname(type='text', name='lastname')
+        p email
+        input#email(type='text', name='email')
+        p Useless Radio buttons
+        label(for='radiobutton') To Be 
+        input#hamlet(type='radio', name='choice')
+        label(for='radiobutton') Or Not To Be 
+        input#hamlet(type='radio', name='choice')
+        p  The Infamous "do you have a bike question" 
+        label(for='checkbox1') I have an awesome bike 
+        input#hamlet(type='checkbox', name='choice')
+        label(for='checkbox') I stole a bike..... 
+        input#hamlet(type='checkbox', name='choice')
+        label(for='checkbox')  I had one, but I gave it to my cat 
+        input#hamlet(type='checkbox', name='choice')
+        p message
+        textarea#message(name='message', cols='40', rows='10')
+          | Dont leave a message...
+        br
+        button(type='submit')  submit 
+        input(type='reset', name='reset', value='reset')
