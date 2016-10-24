@@ -25,10 +25,14 @@ app.post('/form', (request,response) => {
 		let parseData = JSON.parse(data)
 		let searchResults = []
 		for (var i = 0; i < parseData.length; i++) {
-			if (request.body.firstname == parseData[i].firstname) {
+			if (request.body.firstname == parseData[i].firstname || request.body.lastname == parseData[i].lastname ) {
 				searchResults.push (parseData[i])
+				// else if (request.body.lastname == parseData[i].lastname) {
+				// 	searchResults.push (parseData[i])
+				
 			}
 		}
+	
 		console.log(searchResults)
 		response.render("result", {data: searchResults} )
 
