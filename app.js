@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 app.set("view engine", "pug")
 app.set("views", __dirname + "/views")
 
+ape.use(express.static('static'))
+
 
 app.use(bodyParser.urlencoded({ extended: false }))
 
@@ -25,7 +27,7 @@ app.post('/form', (request,response) => {
 		let parseData = JSON.parse(data)
 		let searchResults = []
 		for (var i = 0; i < parseData.length; i++) {
-			if (request.body.firstname == parseData[i].firstname || request.body.lastname == parseData[i].lastname ) {
+			if (request.body.search == parseData[i].firstname || request.body.search == parseData[i].lastname ) {
 				searchResults.push (parseData[i])
 				// else if (request.body.lastname == parseData[i].lastname) {
 				// 	searchResults.push (parseData[i])
@@ -113,7 +115,7 @@ const first = request.body.firstname;
 
 
 //this is the part that will render the index page when you type /index after the localhost
-app.get ("/index", (request, response) => {
+app.get ("/", (request, response) => {
 
 	console.log( "about to render the index page")
 
