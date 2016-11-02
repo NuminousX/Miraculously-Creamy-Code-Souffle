@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 app.set("view engine", "pug")
 app.set("views", __dirname + "/views")
 
+app.use(express.static('static'))
+
 
 app.use(bodyParser.urlencoded({ extended: false }))
 
@@ -16,6 +18,58 @@ app.get ("/form", (request, response) =>{
 	response.render("form")
 })
 
+
+
+// FRont end
+
+// in je front-end is je interface, een input veld.
+// wanneer de gebruiker daar in typt, wordt jquery getriggerd
+// jquery maakt een post request, waarmee hij hij de ingetypde letters meestuurt
+
+// Back end
+
+// back end ontvangt een letter
+// backend loopt door de userfile
+// wanneer de ingetypde letter overeenkomt met een user in je database
+// push deze in een array
+// response send: users die overeen komen met ingetyode letter
+
+// FRont end
+// Data ontvangen, een aantal user komen overeen!
+// Deze displayen
+
+app.post('/form2', (request,response) => {
+	console.log(request.body.search )
+
+	fs.readFile(__dirname + "/users.json", (error, data) => {
+		if (error) throw error
+			// error ? throw error
+		let parseData = JSON.parse(data)
+		let foundUsers = []
+		if (request.body.search) {
+			for (var i = 0; i < parseData.length; i++) {
+				if (parseData[i].firstname.indexOf(request.body.search) > -1  ) {
+					console.log(parseData[i])
+					foundUsers.push (parseData[i])
+				}
+				else {
+					console.log("cheeseWheel.org is too cheesy to display")
+					// else if (request.body.lastname == parseData[i].lastname) {
+					// 	searchResults.push (parseData[i])	
+				}
+			}
+		}
+
+		response.send(foundUsers)
+
+		//for loop to go though parsedata
+		// within loop check if user is equal to input
+		// if that is the case render result with the data of that user 
+		
+	})
+})
+
+//here you can search for existing users in the user database
 app.post('/form', (request,response) => {
 	console.log(request.body )
 
@@ -25,14 +79,14 @@ app.post('/form', (request,response) => {
 		let parseData = JSON.parse(data)
 		let searchResults = []
 		for (var i = 0; i < parseData.length; i++) {
-			if (request.body.firstname == parseData[i].firstname || request.body.lastname == parseData[i].lastname ) {
+			if (request.body.search == parseData[i].firstname || request.body.search == parseData[i].lastname ) {
 				searchResults.push (parseData[i])
 				// else if (request.body.lastname == parseData[i].lastname) {
 				// 	searchResults.push (parseData[i])
 				
 			}
 		}
-	
+
 		console.log(searchResults)
 		response.render("result", {data: searchResults} )
 
@@ -68,7 +122,7 @@ app.post('/createUser', (request,response) => {
 
 				console.log('wrote to the file')
 
-			response.redirect("index")
+			response.redirect("/")
 		})
 
 	})
@@ -113,7 +167,7 @@ const first = request.body.firstname;
 
 
 //this is the part that will render the index page when you type /index after the localhost
-app.get ("/index", (request, response) => {
+app.get ("/", (request, response) => {
 
 	console.log( "about to render the index page")
 
